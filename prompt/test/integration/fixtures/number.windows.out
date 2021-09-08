@@ -1,5 +1,5 @@
  ? How old are you? (7) » 
-\x1b[1A\x1b[27G\x1b[G\x1b[0J ? How old are you? (7) » 19
+\x1b[1A\x1b[27G\x1b[G\x1b[0J ? How old are you? (7) » 18
  × Value must be lower or equal than 20
 \x1b[1A\x1b[1A\x1b[28G\x1b[G\x1b[0J ? How old are you? (7) » 20
 \x1b[?25h\x1b[?25h
