@@ -588,9 +588,10 @@ export class Command<
         typeof handler.values !== "undefined")
     ) {
       const completeHandler: ICompleteHandler = (
+        token: string,
         cmd: Command,
         parent?: Command,
-      ) => handler.complete?.(cmd, parent) || [];
+      ) => handler.complete?.(token, cmd, parent) || [];
       this.complete(name, completeHandler, options);
     }
 

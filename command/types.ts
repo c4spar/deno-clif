@@ -210,7 +210,11 @@ export type ICompleteHandler<
   PG extends Record<string, any> | void = any,
   // deno-lint-ignore no-explicit-any
   P extends Command | undefined = any,
-> = (cmd: Command<O, A, G, PG, P>, parent?: Command) => CompleteHandlerResult;
+> = (
+  token: string,
+  cmd: Command<O, A, G, PG, P>,
+  parent?: Command,
+) => CompleteHandlerResult;
 
 /** Help callback method to print the help. Invoked by the `--help` option and `help` command and the `.getHelp()` and `.showHelp()` method's. */
 export type IHelpHandler<

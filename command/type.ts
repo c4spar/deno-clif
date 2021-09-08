@@ -46,6 +46,7 @@ export abstract class Type<T> {
    * values from the values method are used.
    */
   public complete?(
+    token: string,
     // deno-lint-ignore no-explicit-any
     cmd: Command<any, any, any, any, any>,
     // deno-lint-ignore no-explicit-any

@@ -107,8 +107,10 @@ ${this.generateCompletions(this.cmd).trim()}`;
       required: true,
       standalone: option.standalone,
       arguments: option.args.length
-        ? this.getCompletionCommand(
+        ? this.getOptionCompletionCommand(
           option.args[0].action + " " + getCompletionsPath(command),
+          shortOption,
+          longOption,
         )
         : undefined,
     });
@@ -136,8 +138,26 @@ ${this.generateCompletions(this.cmd).trim()}`;
     return cmd.join(" ");
   }
 
-  private getCompletionCommand(cmd: string): string {
-    return `'(${this.cmd.getName()} completions complete ${cmd.trim()})'`;
+  private getOptionCompletionCommand(
+    cmd: string,
+    shortOption: string | undefined,
+    longOption: string | undefined,
+  ): string {
+    const makeFilter = (s: string) => `string replace -- ${s} ""`;
+    const filters = [];
+    shortOption && filters.push(makeFilter(`-${shortOption}`));
+    longOption && filters.push(makeFilter(`--${longOption}`));
+    return this.getCompletionCommand(cmd, filters);
+  }
+
+  private getCompletionCommand(cmd: string, filters: string[] = []): string {
+    const cmds = [
+      "commandline -tc",
+      ...filters,
+      `string replace -r -- "^\-*" ""`,
+    ];
+    const token = cmds.join(" | ");
+    return `'(${this.cmd.getName()} completions complete -t (${token}) ${cmd.trim()})'`;
   }
 }
 

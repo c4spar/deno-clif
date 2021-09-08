@@ -11,7 +11,7 @@ export class ChildCommandType extends StringType {
   }
 
   /** Complete child command names. */
-  public complete(cmd: Command): string[] {
+  public complete(_token: string, cmd: Command): string[] {
     return (this.#cmd ?? cmd)?.getCommands(false)
       .map((cmd: Command) => cmd.getName()) || [];
   }
